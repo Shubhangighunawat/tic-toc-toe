@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap By SKILLHUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .box {
+        height: 150px;
+        width: 100%;
+        border: 2px solid gray;
+        margin-top: 10px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+
+    /* .box1 {
+        background-color: red;
+    } */
+</style>
+
+<body>
+
+    <div class="container " id="playerCard">
+        <row>
+            <div class="col-sm-6 offset-sm-3">
+                <div class="">
+                    <div class="card">
+                        <div class="card-header">Enter Names</div>
+                        <div class="card-body">
+                            <div>
+                                <!-- <label for="name" class="form-label">First name</label> -->
+                                <input type="text" class="form-control" id="p1" placeholder="Enter Your Name" /><br>
+                                <input type="text" class="form-control" id="p2" placeholder="Enter Your Name" /><br>
+                                <button type="button" onclick="startGame()" class="btn btn-primary w-100">Start
+                                    Game</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </row>
+    </div>
+
+    <!-- .container>.row>.col-sm -->
+    <div class="container" id="output">
+
+    </div>
+    <div class="container d-none" id="gameCard">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2">
+                <div class="card">
+                    <div class="card-header">Tic Tac Toe</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 id="player1">player1</h6>
+                                            <strong id="player1wincount">0</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 id="player2">player2</h6>
+                                            <strong id="player2wincount">0</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <h6>Draw</h6>
+                                            <strong id="drawcount">0</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <h6> Total</h6>
+                                            <strong id="totalcount">0</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- .row>.col-4*9>.box>{$} -->
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="box" id="b1" onclick="game('b1')">1</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="box" id="b2" onclick="game('b2')">2</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="box" id="b3" onclick="game('b3')">3</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="box" id="b4" onclick="game('b4')">4</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="box" id="b5" onclick="game('b5')">5</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="box" id="b6" onclick="game('b6')">6</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="box" id="b7" onclick="game('b7')">7</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="box" id="b8" onclick="game('b8')">8</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="box" id="b9" onclick="game('b9')">9</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let chance = "p1"
+
+        const playerCard = document.getElementById("playerCard")
+        const gameCard = document.getElementById("gameCard")
+
+        let player1 = document.getElementById("player1")
+        let player2 = document.getElementById("player2")
+
+        const player1wincount = document.getElementById("player1wincount")
+        const player2wincount = document.getElementById("player2wincount")
+        const drawcount = document.getElementById("drawcount")
+        const totalcount = document.getElementById("totalcount")
+
+        let p1Count = 0, p2Count = 0, dCount = 0, tCount = 0
+
+        let player1Name, player2Name
+        function startGame() {
+            player1Name = document.getElementById("p1").value
+            player2Name = document.getElementById("p2").value
+            if (player1Name === "" || player2Name === "") {
+                console.log("name required");
+                document.getElementById("output").innerHTML = `
+                <div class="alert alert-danger">
+                  Please Enter Name
+                </div>
+                `
+                setTimeout(() => {
+                    document.getElementById("output").innerHTML = ""
+
+                }, 2000);
+
+            } else {
+                player1.innerHTML = player1Name
+                player2.innerHTML = player2Name
+                playerCard.classList.add("d-none")
+                gameCard.classList.remove("d-none")
+
+            }
+
+        }
+
+        function game(id) {
+            const box = document.getElementById(id)
+            const isRed = box.classList.contains("bg-danger")
+            const isGreen = box.classList.contains("bg-success")
+            if (!isRed && !isGreen) {
+
+
+                if (chance === "p1") {
+                    box.classList.add("bg-danger")
+                    box.innerHTML = `<h1> X </h1>`
+                    chance = "p2"
+
+                } else {
+
+                    box.classList.add("bg-success")
+                    box.innerHTML = `<h1> O </h1>`
+                    chance = "p1"
+                }
+            }
+            if (!winner() && checkAllFill()) {
+                console.log("draw match");
+                dCount++
+                resetGame()
+                // document.getElementById("drawcount").innerHTML =
+                //     setTimeout(function () {
+                //     }, 1000)
+
+            }
+
+        }
+
+        function winner() {
+            return (
+
+                checkWinner("b1", "b2", "b3", "bg-danger") ||
+                checkWinner("b4", "b5", "b6", "bg-danger") ||
+                checkWinner("b7", "b8", "b9", "bg-danger") ||
+                checkWinner("b7", "b8", "b9", "bg-danger") ||
+                checkWinner("b1", "b4", "b7", "bg-danger") ||
+                checkWinner("b2", "b5", "b8", "bg-danger") ||
+                checkWinner("b3", "b6", "b9", "bg-danger") ||
+                checkWinner("b1", "b5", "b9", "bg-danger") ||
+                checkWinner("b3", "b5", "b7", "bg-danger") ||
+                checkWinner("b1", "b2", "b3", "bg-success") ||
+                checkWinner("b4", "b5", "b6", "bg-success") ||
+                checkWinner("b7", "b8", "b9", "bg-success") ||
+                checkWinner("b7", "b8", "b9", "bg-success") ||
+                checkWinner("b1", "b4", "b7", "bg-success") ||
+                checkWinner("b2", "b5", "b8", "bg-success") ||
+                checkWinner("b3", "b6", "b9", "bg-success") ||
+                checkWinner("b1", "b5", "b9", "bg-success") ||
+                checkWinner("b3", "b5", "b7", "bg-success")
+
+            )
+
+        }
+        function checkWinner(id1, id2, id3, color) {
+            const isBox1 = document.getElementById(id1).classList.contains(color)
+            const isBox2 = document.getElementById(id2).classList.contains(color)
+            const isBox3 = document.getElementById(id3).classList.contains(color)
+            if (isBox1 && isBox2 && isBox3) {
+                // console.log(`🤷‍♂️🙌🍟 ${color} is winner  party is on`);
+                document.getElementById("output").innerHTML = ` 
+                <div class="alert alert-primary">
+                     ${color === "bg-danger" ? "Player 1 " : "Player 2"} winner
+                  </div>
+                `
+                setTimeout(function () {
+                    document.getElementById("output").innerHTML = ""
+                }, 2000)
+                setTimeout(function () {
+                    resetGame()
+                }, 1000)
+
+                color === "bg-danger"
+                    ? p1Count++
+                    : p2Count++
+
+                return true
+            }
+            return false
+
+
+        }
+
+        function resetGame() {
+            for (let i = 1; i <= 9; i++) {
+                document.getElementById(`b${i}`).innerHTML = i
+                document.getElementById(`b${i}`).classList.remove("bg-success")
+                document.getElementById(`b${i}`).classList.remove("bg-danger")
+
+            }
+            tCount++
+            stat()
+
+        }
+
+        function checkAllFill() {
+            let boxCount = 0
+            for (let i = 1; i <= 9; i++) {
+
+                const isRed = document.getElementById(`b${i}`).classList.contains("bg-danger")
+                const isGreen = document.getElementById(`b${i}`).classList.contains("bg-success")
+                if (isRed || isGreen) {
+                    boxCount++
+                }
+
+            }
+            return boxCount === 9 ? true : false;
+
+        }
+
+        function stat() {
+            totalcount.innerHTML = tCount
+            drawcount.innerHTML = dCount
+            player1wincount.innerHTML = p1Count
+            player2wincount.innerHTML = p2Count
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>
